@@ -1,10 +1,76 @@
-<h2>Login</h2>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Somigang Server</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#F7F5EF;
+padding:40px;
+}
+
+h1{
+text-align:center;
+color: #000;
+font-weight: bold;
+}
+
+form{
+max-width:300px;
+background:rgba(171, 82, 80, 0.2);
+color: #141413;
+padding:20px;
+margin:0 auto;
+border-radius:10px;
+box-shadow:0 4px 10px #0000001a;
+
+display:flex;
+justify-content:space-between;
+font-size:25px;
+
+}
+
+.amount{
+font-weight:bold;
+color:#ae2432;
+}
+
+button{
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#457b9d;
+color:white;
+}
+
+input{
+width:200px;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:rgba(69, 123, 157, 0.5);
+color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Somigang Server</h1>
 
 <form method="POST" action="/login">
 
-<input name="username" placeholder="felhasználó">
 <input name="password" type="password" placeholder="jelszó">
 
 <button>Belépés</button>
 
 </form>
+</body>
+</html>

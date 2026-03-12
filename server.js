@@ -62,11 +62,11 @@ db.serialize(() => {
 
 app.post("/login",(req,res)=>{
 
-  const {username,password}=req.body;
+  const {password}=req.body;
 
   db.get(
-    "SELECT * FROM users WHERE username=? AND password=?",
-    [username,password],
+    "SELECT * FROM users WHERE password=?",
+    [password],
     (err,user)=>{
 
       if(!user){
@@ -108,7 +108,7 @@ app.post("/pay",(req,res)=>{
 
 const PORT = process.env.PORT || 3000;
 
-cron.schedule("1 * * * *", () => {
+cron.schedule("0 0 1 * *", () => {
 
 console.log("Havi tartozás növelés");
 

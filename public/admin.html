@@ -18,7 +18,7 @@ text-align:center;
 }
 
 .container{
-max-width:700px;
+max-width:400px;
 margin:auto;
 }
 
@@ -43,9 +43,18 @@ font-weight:bold;
 color:#e63946;
 }
 
+input{
+width:80px;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:rgba(69, 123, 157, 0.5);
+color:white;
+}
+
 button{
 padding:8px 12px;
-margin-left:5px;
 border:none;
 border-radius:6px;
 cursor:pointer;
@@ -90,8 +99,9 @@ card.innerHTML=`
 </div>
 
 <div>
-<button onclick="pay(${d.id},1000)">-1000</button>
-<button onclick="pay(${d.id},5000)">-5000</button>
+<input type="number" id="amount-${d.id}">
+<button onclick="pay(${d.id})">Levonás</button>
+<button onclick="spend(${d.id})">Terhelés</button>
 </div>
 `;
 
@@ -103,7 +113,14 @@ list.appendChild(card);
 
 }
 
-function pay(id,amount){
+function pay(id){
+
+const amount=document.getElementById("amount-"+id).value;
+
+if(!amount || amount<=0){
+alert("Adj meg összeget");
+return;
+}
 
 fetch("/pay",{
 method:"POST",
@@ -116,9 +133,31 @@ body:`id=${id}&amount=${amount}`
 
 }
 
+function spend(id){
+
+const amount=document.getElementById("amount-"+id).value;
+
+if(!amount || amount<=0){
+alert("Adj meg összeget");
+return;
+}
+
+fetch("/pay",{
+method:"POST",
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+body:`id=${id}&amount=${-amount}`
+})
+.then(()=>loadDebts());
+
+}
+
 loadDebts();
 
 </script>
+
+
 
 </body>
 </html>
