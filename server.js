@@ -45,22 +45,17 @@ db.serialize(() => {
   // 4 SZEMÉLY
   db.run(`
     INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (1, 'Jani', 10000)
+    VALUES (1, 'Somi', 800)
   `);
 
   db.run(`
     INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (2, 'Peti', 5000)
+    VALUES (2, 'Nejbi', 800)
   `);
 
   db.run(`
     INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (3, 'Anna', 8000)
-  `);
-
-  db.run(`
-    INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (4, 'Kata', 12000)
+    VALUES (3, 'Dave', 800)
   `);
 
 });
@@ -113,13 +108,13 @@ app.post("/pay",(req,res)=>{
 
 const PORT = process.env.PORT || 3000;
 
-cron.schedule("0 0 1 * *", () => {
+cron.schedule("1 * * * *", () => {
 
 console.log("Havi tartozás növelés");
 
 db.run(`
 UPDATE debts
-SET amount = amount + 5000
+SET amount = amount + 800
 `);
 
 });
