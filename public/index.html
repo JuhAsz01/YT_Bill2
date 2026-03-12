@@ -3,7 +3,7 @@
 
 <head>
 
-<title>YouTube Premium</title>
+<title>Somigang Server</title>
 
 <style>
 
@@ -19,17 +19,12 @@ color: #000;
 font-weight: bold;
 }
 
-.container{
-max-width:400px;
-margin:auto;
-}
-
-.card{
-
-background:rgba(171, 82, 80, 0.2);
+form{
+max-width:300px;
+background:rgba(55, 124, 209, 0.2);
 color: #141413;
 padding:20px;
-margin:15px 0;
+margin:0 auto;
 border-radius:10px;
 box-shadow:0 4px 10px #0000001a;
 
@@ -44,41 +39,38 @@ font-weight:bold;
 color:#ae2432;
 }
 
+button{
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#457b9d;
+color:white;
+}
+
+input{
+width:200px;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:rgba(69, 123, 157, 0.5);
+color:white;
+}
 </style>
 
 </head>
 
 <body>
 
-<h1>Youtube Premium</h1>
+<h1>Somigang Server</h1>
 
-<div class="container" id="list"></div>
+<form method="POST" action="/login">
 
-<script>
+<input name="password" type="password" placeholder="jelszó">
 
-fetch("/debts")
-.then(r=>r.json())
-.then(data=>{
+<button>Belépés</button>
 
-const list=document.getElementById("list");
-
-data.forEach(d=>{
-
-const card=document.createElement("div");
-card.className="card";
-
-card.innerHTML=`
-<span>${d.name}</span>
-<span class="amount">${d.amount} Ft</span>
-`;
-
-list.appendChild(card);
-
-});
-
-});
-
-</script>
-
+</form>
 </body>
 </html>

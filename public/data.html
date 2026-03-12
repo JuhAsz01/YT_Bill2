@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>YouTube Premium</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#F7F5EF;
+padding:40px;
+}
+
+h1{
+text-align:center;
+color: #000;
+font-weight: bold;
+}
+
+.container{
+max-width:300px;
+margin:auto;
+}
+
+.card{
+
+background:rgba(55, 124, 209, 0.2);
+color: #141413;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 4px 10px #0000001a;
+
+display:flex;
+justify-content:space-between;
+font-size:25px;
+
+}
+
+.amount_pos{
+font-weight:bold;
+color:#1a7a35;
+}
+
+.amount_neg{
+font-weight:bold;
+color:#ae2432;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Youtube Premium</h1>
+
+<div class="container" id="list"></div>
+
+<script>
+
+fetch("/debts")
+.then(r=>r.json())
+.then(data=>{
+
+const list=document.getElementById("list");
+
+data.forEach(d=>{
+
+const card=document.createElement("div");
+card.className="card";
+
+if(d.amount >= 0){
+
+    card.innerHTML=`
+    <span>${d.name}</span>
+    <span class="amount_pos">${d.amount} Ft</span>
+    `;
+} else {
+
+    card.innerHTML=`
+    <span>${d.name}</span>
+    <span class="amount_neg">${d.amount} Ft</span>
+    `;
+}
+
+list.appendChild(card);
+
+});
+
+});
+
+</script>
+
+</body>
+</html>

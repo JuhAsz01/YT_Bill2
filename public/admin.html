@@ -18,12 +18,12 @@ text-align:center;
 }
 
 .container{
-max-width:400px;
+max-width:350px;
 margin:auto;
 }
 
 .card{
-background:white;
+background:rgba(55, 124, 209, 0.2);
 padding:20px;
 margin:15px 0;
 border-radius:10px;
@@ -38,9 +38,14 @@ align-items:center;
 font-size:18px;
 }
 
-.amount{
+.amount_pos{
 font-weight:bold;
-color:#e63946;
+color:#1a7a35;
+}
+
+.amount_neg{
+font-weight:bold;
+color:#ae2432;
 }
 
 input{
@@ -92,18 +97,37 @@ data.forEach(d=>{
 const card=document.createElement("div");
 card.className="card";
 
-card.innerHTML=`
-<div>
-<div class="name">${d.name}</div>
-<div class="amount">${d.amount} Ft</div>
-</div>
+if(d.amount >= 0){
 
-<div>
-<input type="number" id="amount-${d.id}">
-<button onclick="pay(${d.id})">Levonás</button>
-<button onclick="spend(${d.id})">Terhelés</button>
-</div>
-`;
+    card.innerHTML=`
+    <div>
+    <div class="name">${d.name}</div>
+    <div class="amount_pos">${d.amount} Ft</div>
+    </div>
+
+    <div>
+    <input type="number" id="amount-${d.id}">
+    <button onclick="pay(${d.id})">Hitel</button>
+    <button onclick="spend(${d.id})">Fizet</button>
+    </div>
+    `;
+
+} else {
+
+    card.innerHTML=`
+    <div>
+    <div class="name">${d.name}</div>
+    <div class="amount_neg">${d.amount} Ft</div>
+    </div>
+
+    <div>
+    <input type="number" id="amount-${d.id}">
+    <button onclick="pay(${d.id})">Hitel</button>
+    <button onclick="spend(${d.id})">Fizet</button>
+    </div>
+    `;
+
+}
 
 list.appendChild(card);
 
