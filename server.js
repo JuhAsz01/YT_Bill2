@@ -75,17 +75,17 @@ db.serialize(() => {
   // 4 SZEMÉLY
   db.run(`
     INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (1, 'Somi', 800)
+    VALUES (1, 'Somi', 3200)
   `);
 
   db.run(`
     INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (2, 'Nejbi', 800)
+    VALUES (2, 'Nejbi', -800)
   `);
 
   db.run(`
     INSERT OR IGNORE INTO debts (id, name, amount)
-    VALUES (3, 'Dave', 800)
+    VALUES (3, 'Dave', 3200)
   `);
 
 });
