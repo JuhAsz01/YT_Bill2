@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin panel</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f8;
+padding:40px;
+}
+
+h1{
+text-align:center;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.name{
+font-size:18px;
+}
+
+.amount{
+font-weight:bold;
+color:#e63946;
+}
+
+button{
+padding:8px 12px;
+margin-left:5px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#457b9d;
+color:white;
+}
+
+button:hover{
+background:#35607a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Admin panel</h1>
+
+<div class="container" id="list"></div>
+
+<script>
+
+function loadDebts(){
+
+fetch("/debts")
+.then(r=>r.json())
+.then(data=>{
+
+const list=document.getElementById("list");
+list.innerHTML="";
+
+data.forEach(d=>{
+
+const card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<div>
+<div class="name">${d.name}</div>
+<div class="amount">${d.amount} Ft</div>
+</div>
+
+<div>
+<button onclick="pay(${d.id},1000)">-1000</button>
+<button onclick="pay(${d.id},5000)">-5000</button>
+</div>
+`;
+
+list.appendChild(card);
+
+});
+
+});
+
+}
+
+function pay(id,amount){
+
+fetch("/pay",{
+method:"POST",
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+body:`id=${id}&amount=${amount}`
+})
+.then(()=>loadDebts());
+
+}
+
+loadDebts();
+
+</script>
+
+</body>
+</html>

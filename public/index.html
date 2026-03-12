@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Tartozások</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6f8;
+padding:40px;
+}
+
+h1{
+text-align:center;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+}
+
+.card{
+
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+display:flex;
+justify-content:space-between;
+font-size:20px;
+
+}
+
+.amount{
+font-weight:bold;
+color:#e63946;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Tartozások</h1>
+
+<div class="container" id="list"></div>
+
+<script>
+
+fetch("/debts")
+.then(r=>r.json())
+.then(data=>{
+
+const list=document.getElementById("list");
+
+data.forEach(d=>{
+
+const card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<span>${d.name}</span>
+<span class="amount">${d.amount} Ft</span>
+`;
+
+list.appendChild(card);
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
